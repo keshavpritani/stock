@@ -9,6 +9,7 @@ if($_POST) {
 	$productID=$_POST['productName'][0];
 	$material = $_POST['material'];
 	$material_name = array();
+	$noOfBatch = $_POST['batch'];
 	$qty = $_POST['qty'];
 	$desc = "";
 	for($x = 0; $x < count($material); $x++) 
@@ -38,6 +39,9 @@ if($_POST) {
 		$result = $connect->query($sql);
 	}
 				
+	$sql = "UPDATE product SET rate = rate + $noOfBatch WHERE product_id = $productID";
+	$connect->query($sql);
+
 	$sql = "INSERT INTO order_log (product_id,description) VALUES($productID,'$desc')";
 	
 	

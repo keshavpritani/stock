@@ -55,17 +55,27 @@
 
       	<li id="navDashboard"><a href="index.php"><i class="glyphicon glyphicon-list-alt"></i>  Dashboard</a></li>        
         
-        <li id="navBrand"><a href="brand.php"><i class="glyphicon glyphicon-btc"></i>  Company</a></li>        
+        <!-- <li id="navBrand"><a href="brand.php"><i class="glyphicon glyphicon-btc"></i>  Company</a></li>         -->
 
         <li id="navCategories"><a href="categories.php"> <i class="glyphicon glyphicon-th-list"></i> Materials</a></li>        
 
-        <li id="navProduct"><a href="product.php"> <i class="glyphicon glyphicon-ruble"></i> Product </a></li>     
+        <li id="navProduct"><a href="product.php"> <i class="glyphicon glyphicon-ruble"></i> Product </a></li>   
+
+        <li id="navParty"><a href="party.php"> <i class="glyphicon glyphicon-user"></i> Parties </a></li>     
 
         <li class="dropdown" id="navOrder">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-shopping-cart"></i> Orders <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-shopping-cart"></i> Stock <span class="caret"></span></a>
           <ul class="dropdown-menu">            
-            <li id="topNavAddOrder"><a href="orders.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Add Orders</a></li>            
-            <li id="topNavManageOrder"><a href="orders.php?o=manord"> <i class="glyphicon glyphicon-edit"></i> Manage Orders</a></li>            
+            <li id="topNavAddOrder"><a href="orders.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Add Stock</a></li>            
+            <li id="topNavManageOrder"><a href="orders.php?o=manord"> <i class="glyphicon glyphicon-edit"></i> View Stock Entries</a></li>            
+          </ul>
+        </li>     
+
+        <li class="dropdown" id="navPartyOrder">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-shopping-cart"></i> Order <span class="caret"></span></a>
+          <ul class="dropdown-menu">            
+            <li id="topNavAddPartyOrder"><a href="orders-party.php?o=add"> <i class="glyphicon glyphicon-plus"></i> Add Order</a></li>            
+            <li id="topNavPartyManageOrder"><a href="orders-party.php?o=manord"> <i class="glyphicon glyphicon-edit"></i> Manage Orders</a></li>            
           </ul>
         </li> 
 

@@ -174,7 +174,6 @@ function editCategories(categoriesId = null) {
 							processData: false,
 							success:function(response) {
 								// button loading
-								alert(response);
 								$("#editCategoriesBtn").button('reset');
 
 								if(response.success == true) {

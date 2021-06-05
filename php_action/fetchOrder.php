@@ -42,7 +42,7 @@ if($result->num_rows > 0) {
 
  		$row['description'], 
  		// button
- 		$button 		
+ 		// $button 		
  		); 	
  	$x++;
  } // /while 

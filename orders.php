@@ -123,7 +123,7 @@ if($_GET['o'] == 'add') {
 						<th>Order Date</th>
 						<th>Product Name</th>
 						<th>Materials Used</th>
-						<th>Option</th>
+						<!-- <th>Option</th> -->
 					</tr>
 				</thead>
 			</table>
