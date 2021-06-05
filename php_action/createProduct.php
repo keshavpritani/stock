@@ -9,18 +9,18 @@ if($_POST) {
   // $productImage 	= $_POST['productImage'];
   $quantity 			= $_POST['qty'];
   $rate 					= 0;
-  $brandName 			= $_POST['brandName'];
+  $brandName 			= /*$_POST['brandName']*/ "";
   $categoryName 	= $_POST['categoryName'];
 
 
-	$type = explode('.', $_FILES['productImage']['name']);
+	/*$type = explode('.', $_FILES['productImage']['name']);
 	$type = $type[count($type)-1];		
 	$url = '../assests/images/stock/'.uniqid(rand()).'.'.$type;
 	if($_FILES['productImage']['name']!="" && in_array($type, array('gif', 'jpg', 'jpeg', 'png', 'JPG', 'GIF', 'JPEG', 'PNG')))
 		if(is_uploaded_file($_FILES['productImage']['tmp_name'])) 
-			move_uploaded_file($_FILES['productImage']['tmp_name'], $url);
+			move_uploaded_file($_FILES['productImage']['tmp_name'], $url);*/
 	$sql = "INSERT INTO product (product_name, product_image, brand_id , rate, status) 
-	VALUES ('$productName', '$url', '$brandName', '$rate', 1)";
+	VALUES ('$productName', '', '$brandName', '$rate', 1)";
 	// echo "$sql";
 
 	if($connect->query($sql) === TRUE) {

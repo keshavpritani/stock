@@ -20,9 +20,8 @@
                 <table class="table" id="manageProductTable">
                     <thead>
                         <tr>
-                            <th style="width:10%;">Photo</th>
                             <th>Product Name</th>
-                            <th>Brand</th>
+                            <th>Stock</th>
                             <th style="width:15%;">Options</th>
                         </tr>
                     </thead>
@@ -46,18 +45,6 @@
                     <h4 class="modal-title"><i class="fa fa-plus"></i> Add Product</h4>
                 </div>
                 <div class="modal-body" style="max-height:450px; overflow:auto;">
-                    <div id="add-product-messages"></div>
-                    <div class="form-group">
-                        <label for="productImage" class="col-sm-3 control-label">Product Image: </label>
-                        <label class="col-sm-1 control-label">: </label>
-                        <div class="col-sm-8">
-                            <!-- the avatar markup -->
-                            <div id="kv-avatar-errors-1" class="center-block" style="display:none;"></div>
-                            <div class="kv-avatar center-block">					        
-                                <input type="file" class="form-control" id="productImage" placeholder="Product Name" name="productImage" class="file-loading" style="width:auto;"/>
-                            </div>
-                        </div>
-                    </div>
                     <!-- /form-group-->	     	           	       
                     <div class="form-group">
                         <label for="productName" class="col-sm-3 control-label">Product Name: </label>
@@ -75,7 +62,7 @@
                         </div>
                     </div> -->
                     <!-- /form-group-->	     	        
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="brandName" class="col-sm-3 control-label">Company Name: </label>
                         <label class="col-sm-1 control-label">: </label>
                         <div class="col-sm-8">
@@ -91,7 +78,7 @@
 								?>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- /form-group-->	
                     <div class="form-group">
                         <label for="categoryName" class="col-sm-3 control-label">Materials: </label>
@@ -169,44 +156,10 @@
                 <div class="div-result">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#photo" aria-controls="home" role="tab" data-toggle="tab">Photo</a></li>
                         <li role="presentation"><a href="#productInfo" aria-controls="profile" role="tab" data-toggle="tab">Product Info</a></li>
                     </ul>
                     <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="photo">
-                            <form action="php_action/editProductImage.php" method="POST" id="updateProductImageForm" class="form-horizontal" enctype="multipart/form-data">
-                                <br />
-                                <div id="edit-productPhoto-messages"></div>
-                                <div class="form-group">
-                                    <label for="editProductImage" class="col-sm-3 control-label">Product Image: </label>
-                                    <label class="col-sm-1 control-label">: </label>
-                                    <div class="col-sm-8">							    				   
-                                        <img src="" id="getProductImage" class="thumbnail" style="width:250px; height:250px;" />
-                                    </div>
-                                </div>
-                                <!-- /form-group-->	     	           	       
-                                <div class="form-group">
-                                    <label for="editProductImage" class="col-sm-3 control-label">Select Photo: </label>
-                                    <label class="col-sm-1 control-label">: </label>
-                                    <div class="col-sm-8">
-                                        <!-- the avatar markup -->
-                                        <div id="kv-avatar-errors-1" class="center-block" style="display:none;"></div>
-                                        <div class="kv-avatar center-block">					        
-                                            <input type="file" class="form-control" id="editProductImage" placeholder="Product Name" name="editProductImage" class="file-loading" style="width:auto;"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /form-group-->	     	           	       
-                                <div class="modal-footer editProductPhotoFooter">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-                                    <!-- <button type="submit" class="btn btn-success" id="editProductImageBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button> -->
-                                </div>
-                                <!-- /modal-footer -->
-                            </form>
-                            <!-- /form -->
-                        </div>
-                        <!-- product image -->
+                    
                         <div role="tabpanel" class="tab-pane" id="productInfo">
                             <form class="form-horizontal" id="editProductForm" action="php_action/editProduct.php" method="POST">
                                 <br />
@@ -227,7 +180,7 @@
                                     </div>
                                 </div> -->
                                 <!-- /form-group-->	     	        
-                                <div class="form-group">
+                                 <!--<div class="form-group">
                                     <label for="editBrandName" class="col-sm-3 control-label">Brand Name: </label>
                                     <label class="col-sm-1 control-label">: </label>
                                     <div class="col-sm-8">
@@ -245,8 +198,9 @@
 											?>
                                         </select>
                                     </div>
-                                </div>
-                                <!-- /form-group-->	<div class="form-group">
+                                </div> -->
+                                <!-- /form-group-->	
+                                <div class="form-group">
                         <label for="categoryName" class="col-sm-3 control-label">Materials: </label>
                         <label class="col-sm-1 control-label">: </label>
                         <div class="col-sm-8">

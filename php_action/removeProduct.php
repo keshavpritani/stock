@@ -10,6 +10,8 @@ $productId = $_POST['productId'];
 if($productId) { 
 
  $sql = "UPDATE product SET status = 2 WHERE product_id = {$productId}";
+ $connect->query($sql);
+ $sql = "DELETE FROM product_materials WHERE product_id = {$productId}";
 
  if($connect->query($sql) === TRUE) {
  	$valid['success'] = true;

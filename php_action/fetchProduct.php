@@ -4,9 +4,8 @@
 
 require_once 'core.php';
 
-$sql = "SELECT product.product_id, product.product_name, product.product_image, product.brand_id,  product.rate, product.status, brands.brand_name 
+$sql = "SELECT product.product_id, product.product_name, product.product_image, product.brand_id,  product.rate, product.status 
 		FROM product 
-		INNER JOIN brands ON product.brand_id = brands.brand_id 
 		WHERE product.status = 1";
 
 $result = $connect->query($sql);
@@ -39,18 +38,17 @@ if($result->num_rows > 0) {
 	// 	$brand = $row['brand_name'];
 	// }
 
-	$brand = $row['brand_name'];
+	// $brand = $row['brand_name'];
+	$qty = $row['rate'];
 
 	$imageUrl = substr($row['product_image'], 3);
 	$productImage = "<img class='img-round' src='".$imageUrl."' style='height:30px; width:50px;'  />";
 
- 	$output['data'][] = array( 		
- 		// image
- 		$productImage,
+ 	$output['data'][] = array( 
  		// product name
  		$row['product_name'], 	 	
  		// brand
- 		$brand,
+ 		$qty,
  		// button
  		$button 		
  		); 	

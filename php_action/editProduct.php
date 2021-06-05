@@ -7,10 +7,10 @@ $valid['success'] = array('success' => false, 'messages' => array());
 if($_POST) {
 	$productId = $_POST['productId'];
 	$productName 		= $_POST['editProductName']; 
-	$rate 					= 0;
-	$brandName 			= $_POST['editBrandName'];
+	// $rate 					= 0;
+	$brandName 			= /*$_POST['editBrandName']*/ "";
 
-	$sql = "UPDATE product SET product_name = '$productName', brand_id = '$brandName', rate = '$rate' WHERE product_id = $productId ";
+	$sql = "UPDATE product SET product_name = '$productName', brand_id = '$brandName' WHERE product_id = $productId ";
 	if($connect->query($sql) === TRUE) {
 		$valid['success'] = true;
 		$valid['messages'] = "Successfully Update";	
