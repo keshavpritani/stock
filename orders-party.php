@@ -22,6 +22,8 @@ if($_GET['o'] == 'add') {
   		Add Order
 		<?php } else if($_GET['o'] == 'manord') { ?>
 			Manage Order
+		<?php } else if($_GET['o'] == 'viewOrder') { ?>
+			View Order
 		<?php } // /else manage order ?>
   </li>
 </ol>
@@ -35,6 +37,8 @@ if($_GET['o'] == 'add') {
 		echo "Manage Order";
 	} else if($_GET['o'] == 'editOrd') { 
 		echo "Edit Order";
+	}else if($_GET['o'] == 'viewOrder') { 
+		echo "View Order";
 	}
 	?>	
 </h4>
@@ -50,6 +54,8 @@ if($_GET['o'] == 'add') {
 			<i class="glyphicon glyphicon-edit"></i> Manage Order
 		<?php } else if($_GET['o'] == 'editOrd') { ?>
 			<i class="glyphicon glyphicon-edit"></i> Edit Order
+		<?php }else if($_GET['o'] == 'editOrd') { ?>
+			<i class="glyphicon glyphicon-edit"></i> View Order
 		<?php } ?>
 
 	</div> <!--/panel-->	
@@ -135,6 +141,7 @@ if($_GET['o'] == 'add') {
 			      <button type="reset" class="btn btn-default" onclick="resetOrderForm()"><i class="glyphicon glyphicon-erase"></i> Reset</button>
 			  </div>
 			</form>
+		
 		<?php } else if($_GET['o'] == 'manord') { 
 			// manage order
 			?>
@@ -155,108 +162,136 @@ if($_GET['o'] == 'add') {
 
 		<?php 
 		// /else manage order
-		} else if($_GET['o'] == 'editOrd') {
-			// get order
-			?>
-			
-			<div class="success-messages"></div> <!--/success-messages-->
+		} else if($_GET['o'] == 'viewOrder') {
 
-  		<form class="form-horizontal" method="POST" action="php_action/editOrder.php" id="editOrderForm">
+				$orderId = $_GET['i'];
 
-  			<?php $orderId = $_GET['i'];
-
-  			$sql = "SELECT orders.order_id, orders.order_date, orders.client_name, orders.client_contact, orders.sub_total, orders.vat, orders.total_amount, orders.discount, orders.grand_total, orders.paid, orders.due, orders.payment_type, orders.payment_status FROM orders 	
-					WHERE orders.order_id = {$orderId}";
-
+  			$sql = "SELECT order_id, order_date, party_name,product_ids FROM party_order NATURAL JOIN parties WHERE order_id = $orderId";
+  			// echo $sql;
 				$result = $connect->query($sql);
-				$data = $result->fetch_row();				
+				$data = $result->fetch_row();
   			?>
 
 			  <div class="form-group">
 			    <label for="orderDate" class="col-sm-2 control-label">Order Date</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="orderDate" name="orderDate" autocomplete="off" value="<?php echo $data[1] ?>" />
+			    	<?php echo $data[1] ?>
 			    </div>
 			  </div> <!--/form-group-->
+			  <br>
 			  <div class="form-group">
 			    <label for="clientName" class="col-sm-2 control-label">Client Name</label>
 			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="clientName" name="clientName" placeholder="Client Name" autocomplete="off" value="<?php echo $data[2] ?>" />
+			    	<?php echo $data[2] ?>
 			    </div>
-			  </div> <!--/form-group-->
-			  <div class="form-group">
-			    <label for="clientContact" class="col-sm-2 control-label">Client Contact</label>
-			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="clientContact" name="clientContact" placeholder="Contact Number" autocomplete="off" value="<?php echo $data[3] ?>" />
-			    </div>
-			  </div> <!--/form-group-->			  
-
+			  </div> <!--/form-group-->		  
+			  <br>
+			  <br>
 			  <table class="table" id="productTable">
 			  	<thead>
 			  		<tr>			  			
 			  			<th style="width:40%;">Product</th>
-			  			<th style="width:20%;">Rate</th>
-			  			<th style="width:15%;">Quantity</th>			  			
-			  			<th style="width:15%;">Total</th>			  			
+			  			<th style="width:15%;">Quantity</th>
+			  		</tr>
+			  	</thead>
+			  	<tbody>
+			  		<?php
+
+							$ps = explode("|", $data[3]);
+							for ($i=0; $i < count($ps)-1; $i++) {
+								$id = explode("-",$ps[$i]);
+								// print_r($id); 
+								$qty=$id[1];
+								$id=$id[0];
+								$sql = "SELECT product_name FROM product WHERE product_id = $id";
+								$result = $connect->query($sql);
+								$row = $result->fetch_row();
+								// echo "$row[0]";
+						?>
+			  			<tr>			  				
+			  				<td style="margin-left:20px;">
+			  						<?php echo $row[0]; ?>
+			  				</td>		
+			  				<td style="margin-left:20px;">
+			  						<?php echo $qty; ?>
+			  				</td>
+			  			</tr>
+		  			<?php
+			  		} // /for
+			  		?>
+			  	</tbody>			  	
+			  </table>
+
+		<?php
+		} else if($_GET['o'] == 'editOrd') {
+			// get order
+			?>
+			
+			<div class="success-messages"></div> <!--/success-messages-->
+<br>
+<br>
+
+  			<?php 
+  			$orderId = $_GET['i'];
+
+  			$sql = "SELECT order_id, order_date, party_name,product_ids FROM party_order NATURAL JOIN parties WHERE order_id = $orderId";
+  			// echo $sql;
+				$result = $connect->query($sql);
+				$data = $result->fetch_row();
+  			?>
+
+			  <div class="form-group">
+			    <label for="orderDate" class="col-sm-2 control-label">Order Date</label>
+			    <div class="col-sm-10">
+			    	<?php echo $data[1] ?>
+			    </div>
+			  </div> <!--/form-group-->
+			  <br>
+			  <div class="form-group">
+			    <label for="clientName" class="col-sm-2 control-label">Client Name</label>
+			    <div class="col-sm-10">
+			    	<?php echo $data[2] ?>
+			    </div>
+			  </div> <!--/form-group-->		  
+			  <br>
+			  <br>
+
+  		<form class="form-horizontal" method="POST" action="php_action/editPartyOrder.php" id="editOrderForm">
+			  <table class="table" id="productTable">
+			  	<thead>
+			  		<tr>			  			
+			  			<th style="width:40%;">Product</th>
+			  			<th style="width:15%;">Quantity</th>		  			
 			  			<th style="width:10%;"></th>
 			  		</tr>
 			  	</thead>
 			  	<tbody>
 			  		<?php
 
-			  		$orderItemSql = "SELECT order_item.order_item_id, order_item.order_id, order_item.product_id, order_item.quantity, order_item.rate, order_item.total FROM order_item WHERE order_item.order_id = {$orderId}";
-						$orderItemResult = $connect->query($orderItemSql);
-						// $orderItemData = $orderItemResult->fetch_all();						
-						
-						// print_r($orderItemData);
+			  		$ps = explode("|", $data[3]);
 			  		$arrayNumber = 0;
 			  		// for($x = 1; $x <= count($orderItemData); $x++) {
 			  		$x = 1;
-			  		while($orderItemData = $orderItemResult->fetch_array()) { 
+							for ($i=0; $i < count($ps)-1; $i++) {
+								$id = explode("-",$ps[$i]);
+								// print_r($id); 
+								$qty=$id[1];
+								$id=$id[0];
+								$sql = "SELECT product_name FROM product WHERE product_id = $id";
+								$result = $connect->query($sql);
+								$row = $result->fetch_row();
 			  			// print_r($orderItemData); ?>
-			  			<tr id="row<?php echo $x; ?>" class="<?php echo $arrayNumber; ?>">			  				
+			  			<tr id="row<?php echo $x;?>" class="<?php echo $arrayNumber; ?>">			  				
 			  				<td style="margin-left:20px;">
-			  					<div class="form-group">
-
-			  					<select class="form-control" name="productName[]" id="productName<?php echo $x; ?>" onchange="getProductData(<?php echo $x; ?>)" >
-			  						<option value="">~~SELECT~~</option>
-			  						<?php
-			  							$productSql = "SELECT * FROM product WHERE active = 1 AND status = 1 AND quantity != 0";
-			  							$productData = $connect->query($productSql);
-
-			  							while($row = $productData->fetch_array()) {									 		
-			  								$selected = "";
-			  								if($row['product_id'] == $orderItemData['product_id']) {
-			  									$selected = "selected";
-			  								} else {
-			  									$selected = "";
-			  								}
-
-			  								echo "<option value='".$row['product_id']."' id='changeProduct".$row['product_id']."' ".$selected." >".$row['product_name']."</option>";
-										 	} // /while 
-
-			  						?>
-		  						</select>
+			  						<?php echo $row[0]; ?>
+			  				</td>		
+			  				<td style="margin-left:20px;">
+			  						<div class="form-group">
+			  					<input type="number" name="quantity[]" id="quantity<?php echo $x; ?>" autocomplete="off" class="form-control" min="0" value="<?php echo $qty; ?>" style="width: 50%;float: right;" />
 			  					</div>
-			  				</td>
-			  				<td style="padding-left:20px;">			  					
-			  					<input type="text" name="rate[]" id="rate<?php echo $x; ?>" autocomplete="off" disabled="true" class="form-control" value="<?php echo $orderItemData['rate']; ?>" />			  					
-			  					<input type="hidden" name="rateValue[]" id="rateValue<?php echo $x; ?>" autocomplete="off" class="form-control" value="<?php echo $orderItemData['rate']; ?>" />			  					
-			  				</td>
-			  				<td style="padding-left:20px;">
-			  					<div class="form-group">
-			  					<input type="number" name="quantity[]" id="quantity<?php echo $x; ?>" onkeyup="getTotal(<?php echo $x ?>)" autocomplete="off" class="form-control" min="1" value="<?php echo $orderItemData['quantity']; ?>" />
-			  					</div>
-			  				</td>
-			  				<td style="padding-left:20px;">			  					
-			  					<input type="text" name="total[]" id="total<?php echo $x; ?>" autocomplete="off" class="form-control" disabled="true" value="<?php echo $orderItemData['total']; ?>"/>			  					
-			  					<input type="hidden" name="totalValue[]" id="totalValue<?php echo $x; ?>" autocomplete="off" class="form-control" value="<?php echo $orderItemData['total']; ?>"/>			  					
-			  				</td>
-			  				<td>
-
-			  					<button class="btn btn-default removeProductRowBtn" type="button" id="removeProductRowBtn" onclick="removeProductRow(<?php echo $x; ?>)"><i class="glyphicon glyphicon-trash"></i></button>
 			  				</td>
 			  			</tr>
+			  			
 		  			<?php
 		  			$arrayNumber++;
 		  			$x++;
@@ -265,96 +300,11 @@ if($_GET['o'] == 'add') {
 			  	</tbody>			  	
 			  </table>
 
-			  <div class="col-md-6">
-			  	<div class="form-group">
-				    <label for="subTotal" class="col-sm-3 control-label">Sub Amount</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="subTotal" name="subTotal" disabled="true" value="<?php echo $data[4] ?>" />
-				      <input type="hidden" class="form-control" id="subTotalValue" name="subTotalValue" value="<?php echo $data[4] ?>" />
-				    </div>
-				  </div> <!--/form-group-->			  
-				  <div class="form-group">
-				    <label for="vat" class="col-sm-3 control-label">VAT 13%</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="vat" name="vat" disabled="true" value="<?php echo $data[5] ?>"  />
-				      <input type="hidden" class="form-control" id="vatValue" name="vatValue" value="<?php echo $data[5] ?>"  />
-				    </div>
-				  </div> <!--/form-group-->			  
-				  <div class="form-group">
-				    <label for="totalAmount" class="col-sm-3 control-label">Total Amount</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="totalAmount" name="totalAmount" disabled="true" value="<?php echo $data[6] ?>" />
-				      <input type="hidden" class="form-control" id="totalAmountValue" name="totalAmountValue" value="<?php echo $data[6] ?>"  />
-				    </div>
-				  </div> <!--/form-group-->			  
-				  <div class="form-group">
-				    <label for="discount" class="col-sm-3 control-label">Discount</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="discount" name="discount" onkeyup="discountFunc()" autocomplete="off" value="<?php echo $data[7] ?>" />
-				    </div>
-				  </div> <!--/form-group-->	
-				  <div class="form-group">
-				    <label for="grandTotal" class="col-sm-3 control-label">Grand Total</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="grandTotal" name="grandTotal" disabled="true" value="<?php echo $data[8] ?>"  />
-				      <input type="hidden" class="form-control" id="grandTotalValue" name="grandTotalValue" value="<?php echo $data[8] ?>"  />
-				    </div>
-				  </div> <!--/form-group-->			  		  
-			  </div> <!--/col-md-6-->
-
-			  <div class="col-md-6">
-			  	<div class="form-group">
-				    <label for="paid" class="col-sm-3 control-label">Paid Amount</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="paid" name="paid" autocomplete="off" onkeyup="paidAmount()" value="<?php echo $data[9] ?>"  />
-				    </div>
-				  </div> <!--/form-group-->			  
-				  <div class="form-group">
-				    <label for="due" class="col-sm-3 control-label">Due Amount</label>
-				    <div class="col-sm-9">
-				      <input type="text" class="form-control" id="due" name="due" disabled="true" value="<?php echo $data[10] ?>"  />
-				      <input type="hidden" class="form-control" id="dueValue" name="dueValue" value="<?php echo $data[10] ?>"  />
-				    </div>
-				  </div> <!--/form-group-->		
-				  <div class="form-group">
-				    <label for="clientContact" class="col-sm-3 control-label">Payment Type</label>
-				    <div class="col-sm-9">
-				      <select class="form-control" name="paymentType" id="paymentType" >
-				      	<option value="">~~SELECT~~</option>
-				      	<option value="1" <?php if($data[11] == 1) {
-				      		echo "selected";
-				      	} ?> >Cheque</option>
-				      	<option value="2" <?php if($data[11] == 2) {
-				      		echo "selected";
-				      	} ?>  >Cash</option>
-				      	<option value="3" <?php if($data[11] == 3) {
-				      		echo "selected";
-				      	} ?> >Credit Card</option>
-				      </select>
-				    </div>
-				  </div> <!--/form-group-->							  
-				  <div class="form-group">
-				    <label for="clientContact" class="col-sm-3 control-label">Payment Status</label>
-				    <div class="col-sm-9">
-				      <select class="form-control" name="paymentStatus" id="paymentStatus">
-				      	<option value="">~~SELECT~~</option>
-				      	<option value="1" <?php if($data[12] == 1) {
-				      		echo "selected";
-				      	} ?>  >Full Payment</option>
-				      	<option value="2" <?php if($data[12] == 2) {
-				      		echo "selected";
-				      	} ?> >Advance Payment</option>
-				      	<option value="3" <?php if($data[10] == 3) {
-				      		echo "selected";
-				      	} ?> >No Payment</option>
-				      </select>
-				    </div>
-				  </div> <!--/form-group-->							  
-			  </div> <!--/col-md-6-->
+			  
 
 
 			  <div class="form-group editButtonFooter">
-			    <div class="col-sm-offset-2 col-sm-10">
+			    <div class="col-sm-10">
 			    <button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-plus-sign"></i> Add Row </button>
 
 			    <input type="hidden" name="orderId" id="orderId" value="<?php echo $_GET['i']; ?>" />
