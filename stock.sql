@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2021 at 09:54 AM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Generation Time: Jun 08, 2021 at 10:14 AM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -59,36 +59,36 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`categories_id`, `categories_name`, `qty_in_stock`, `categories_status`) VALUES
-(16, 'Soda', '275.000', 1),
-(17, 'Salt', '285.000', 1),
-(18, 'Sodium Meta', '2.000', 1),
-(19, 'Ammonia', '250.000', 1),
+(16, 'Soda', '260.800', 1),
+(17, 'Salt', '265.000', 1),
+(18, 'Sodium Meta', '1.000', 1),
+(19, 'Ammonia', '244.000', 1),
 (20, 'Chocolate Dark essence', '170.000', 1),
-(21, 'Jeera Essence', '55.000', 1),
+(21, 'Jeera Essence', '53.000', 1),
 (22, 'Capsicum essence', '15.000', 1),
 (23, 'Chocolate colour', '53.000', 1),
-(24, 'Orange essence', '10.000', 1),
+(24, 'Orange essence', '4.000', 1),
 (25, 'Pineapple essence', '5.000', 1),
 (26, 'Veron Powder', '10.000', 1),
 (27, 'Melanan Powder', '10.000', 1),
-(28, 'Potassium Meta-Bisulphide', '20.000', 1),
-(29, 'Orange colour', '25.000', 1),
+(28, 'Potassium Meta-Bisulphide', '20.000', 2),
+(29, 'Orange colour', '19.000', 1),
 (30, 'Coconut Flavour', '4.000', 1),
 (31, 'Mawa Flavour', '1.000', 1),
 (32, 'strawberry colour', '25.000', 1),
 (33, 'Pineapple colour', '25.000', 1),
 (34, 'citric acid', '10.000', 1),
 (35, 'Sugar syrup', '250.000', 1),
-(36, 'Kotina Ghee', '238.000', 1),
+(36, 'Kotina Ghee', '154.000', 1),
 (37, 'Trim Ghee', '975.000', 1),
 (38, 'Skimmed Milk Powder', '3758.000', 1),
-(39, 'Lily Oil', '229.000', 1),
+(39, 'Lily Oil', '215.000', 1),
 (40, 'Malto Dextrin', '300.000', 1),
-(41, 'Coco Powder', '5407.000', 1),
+(41, 'Coco Powder', '5399.000', 1),
 (42, 'Old milk powder', '250.000', 1),
-(43, 'Maida ', '311.000', 1),
+(43, 'Maida ', '131.000', 1),
 (44, 'Maida lala halwa', '2000.000', 2),
-(45, 'Sugar', '14244.000', 1),
+(45, 'Sugar', '13988.000', 1),
 (46, 'Glucose-D', '80.000', 1),
 (47, 'Whey Powder', '375.000', 1),
 (48, 'PGPR', '100.000', 1),
@@ -97,13 +97,13 @@ INSERT INTO `categories` (`categories_id`, `categories_name`, `qty_in_stock`, `c
 (51, 'ziva essence', '2.000', 1),
 (52, 'Prova essence', '5.000', 1),
 (53, 'Triveni Ghee', '4680.000', 1),
-(54, 'Fry oil', '360.000', 1),
-(55, 'Ajwain', '80.000', 1),
-(56, 'Jeera', '44.000', 1),
-(57, 'Starch powder', '115.000', 1),
-(58, 'lecithin', '514.000', 1),
-(59, 'Improver', '300.000', 1),
-(60, 'wafer Maida', '2250.000', 1),
+(54, 'Fry oil', '280.000', 1),
+(55, 'Ajwain', '78.000', 1),
+(56, 'Jeera', '42.000', 1),
+(57, 'Starch powder', '95.000', 1),
+(58, 'lecithin', '500.000', 1),
+(59, 'Improver', '286.000', 1),
+(60, 'wafer Maida', '1830.000', 1),
 (61, 'pink colour', '1.000', 1),
 (62, 'Butterscotch flavour', '3.000', 1),
 (63, 'slsl', '0.400', 2);
@@ -120,6 +120,60 @@ CREATE TABLE `order_log` (
   `description` text NOT NULL,
   `entered_time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `order_log`
+--
+
+INSERT INTO `order_log` (`id`, `product_id`, `description`, `entered_time`) VALUES
+(1, 44, 'Salt - 96.000, Veron Powder - 6.000, ', '2021-06-05 11:42:39'),
+(2, 39, 'Soda - 0.200, Salt - 6.000, Ammonia - 6.000, Jeera Essence - 2.000, Maida  - 180.000, Sugar - 60.000, Fry oil - 80.000, Ajwain - 2.000, Jeera - 2.000, ', '2021-06-07 16:14:41'),
+(3, 41, 'Soda - 6.000, Salt - 6.000, Sodium Meta - 1, Orange essence - 6.000, Orange colour - 6.000, Kotina Ghee - 36.000, Lily Oil - 6.000, Sugar - 84.000, Starch powder - 12.000, lecithin - 6.000, Improver - 6.000, wafer Maida - 180.000, ', '2021-06-07 18:05:28'),
+(4, 42, 'Soda - 8.000, Salt - 8.000, Kotina Ghee - 48.000, Lily Oil - 8.000, Coco Powder - 8.000, Sugar - 112.000, Starch powder - 8.000, lecithin - 8.000, Improver - 8.000, wafer Maida - 240.000, ', '2021-06-07 18:05:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parties`
+--
+
+CREATE TABLE `parties` (
+  `party_id` int(11) NOT NULL,
+  `party_name` varchar(30) NOT NULL,
+  `party_status` int(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `parties`
+--
+
+INSERT INTO `parties` (`party_id`, `party_name`, `party_status`) VALUES
+(1, 'Keshav', 2),
+(2, 'Pritani', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `party_order`
+--
+
+CREATE TABLE `party_order` (
+  `order_id` int(11) NOT NULL,
+  `party_id` int(11) NOT NULL,
+  `product_ids` varchar(200) NOT NULL,
+  `comments` varchar(100) NOT NULL,
+  `order_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `party_order`
+--
+
+INSERT INTO `party_order` (`order_id`, `party_id`, `product_ids`, `comments`, `order_date`) VALUES
+(1, 2, '40-1|40-5|', '', '2021-06-05 15:09:05'),
+(2, 2, '40-2|44-1|', '', '2021-06-05 15:09:31'),
+(4, 2, '39-2|40-2|', '', '2021-06-07 16:15:35'),
+(5, 2, '42-4|41-1|', '', '2021-06-07 18:07:38');
 
 -- --------------------------------------------------------
 
@@ -143,8 +197,10 @@ CREATE TABLE `product` (
 INSERT INTO `product` (`product_id`, `product_name`, `product_image`, `brand_id`, `rate`, `status`) VALUES
 (39, 'Kaju', '../assests/images/stock/877361131607d79e77ca07.jpg', 15, '0', 1),
 (40, 'Wafer stick jar', '../assests/images/stock/603006459607fc00dbd2eb.jpg', 15, '0', 1),
-(41, 'Strawberry Wafer ', '../assests/images/stock/1013965389607fc5d35ccb2.jpg', 15, '0', 1),
-(42, 'chocolate wafer biscuit', '../assests/images/stock/414502097607fc6e4a37e1.jpg', 15, '0', 1);
+(41, 'Strawberry Wafer ', '../assests/images/stock/1013965389607fc5d35ccb2.jpg', 15, '8', 1),
+(42, 'chocolate wafer biscuit', '../assests/images/stock/414502097607fc6e4a37e1.jpg', 15, '4', 1),
+(44, 'Test', '', 0, '2', 1),
+(49, 'Test21', '', 0, '0', 2);
 
 -- --------------------------------------------------------
 
@@ -206,7 +262,9 @@ INSERT INTO `product_materials` (`id`, `product_id`, `categories_id`, `qty`) VAL
 (59, 42, 39, '1.000'),
 (60, 42, 45, '14.000'),
 (61, 42, 36, '6.000'),
-(62, 42, 41, '1.000');
+(62, 42, 41, '1.000'),
+(65, 44, 17, '32.000'),
+(72, 44, 26, '32.000');
 
 -- --------------------------------------------------------
 
@@ -252,6 +310,19 @@ ALTER TABLE `order_log`
   ADD KEY `product_id` (`product_id`);
 
 --
+-- Indexes for table `parties`
+--
+ALTER TABLE `parties`
+  ADD PRIMARY KEY (`party_id`);
+
+--
+-- Indexes for table `party_order`
+--
+ALTER TABLE `party_order`
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `party_id` (`party_id`);
+
+--
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
@@ -291,19 +362,31 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `order_log`
 --
 ALTER TABLE `order_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `parties`
+--
+ALTER TABLE `parties`
+  MODIFY `party_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `party_order`
+--
+ALTER TABLE `party_order`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `product_materials`
 --
 ALTER TABLE `product_materials`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -320,6 +403,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `order_log`
   ADD CONSTRAINT `order_log_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
+
+--
+-- Constraints for table `party_order`
+--
+ALTER TABLE `party_order`
+  ADD CONSTRAINT `party_order_ibfk_1` FOREIGN KEY (`party_id`) REFERENCES `parties` (`party_id`);
 
 --
 -- Constraints for table `product_materials`
