@@ -11,7 +11,7 @@
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<div class="page-heading"> <i class="glyphicon glyphicon-edit"></i> Manage Material</div>
+				<div class="page-heading"> <i class="glyphicon glyphicon-edit"></i> Manage Material </div>
 			</div> <!-- /panel-heading -->
 			<div class="panel-body">
 
